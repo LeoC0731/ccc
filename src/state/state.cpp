@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <cstdint>
+#include <climits>
 
 #include "./state.hpp"
 #include "../config.hpp"
@@ -11,9 +12,54 @@
  * 
  * @return int 
  */
-int State::evaluate(){
+int State::evaluate(int current_player){
   // [TODO] design your own evaluation function
-  return 0;
+  //0=empty, 1=pawn, 2=rook, 3=knight, 4=bishop, 5=queen, 6=king
+  //Queen=20, Bishop=8, Knight=7, Rook=6, Pawn=2.
+  int value = 0;
+  for(int i = 0 ; i < BOARD_H ; i++){
+    for(int j = 0 ; j < BOARD_W ; j++){
+      //player current
+      if(board.board[current_player][i][j] == '1'){
+          value += 2;
+      }
+      else if(board.board[current_player][i][j] == '2'){
+          value += 6;
+      }
+      else if(board.board[current_player][i][j] == '3'){
+        value += 7;
+      }
+      else if(board.board[current_player][i][j] == '4'){
+        value += 8;
+      }
+      else if(board.board[current_player][i][j] == '5'){
+        value += 20;
+      }
+      else if(board.board[current_player][i][j] == '6'){
+        value += INT_MAX;
+      }
+      //player opponent
+      if(board.board[1-current_player][i][j] == '1'){
+          value -= 2;
+      }
+      else if(board.board[1-current_player][i][j] == '2'){
+          value -= 6;
+      }
+      else if(board.board[1-current_player][i][j] == '3'){
+        value -= 7;
+      }
+      else if(board.board[1-current_player][i][j] == '4'){
+        value -= 8;
+      }
+      else if(board.board[1-current_player][i][j] == '5'){
+        value -= 20;
+      }
+      else if(board.board[1-current_player][i][j] == '6'){
+        value -= INT_MAX;
+      }
+    }
+  }
+  return value;
 }
 
 
