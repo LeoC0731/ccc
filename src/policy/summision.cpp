@@ -4,7 +4,7 @@
 #include <climits>
 
 #include "../state/state.hpp"
-#include "./minimax.hpp"
+#include "./summision.hpp"
 
 
 /**
