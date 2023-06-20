@@ -20,45 +20,46 @@ int State::evaluate(int current_player){
   for(int i = 0 ; i < BOARD_H ; i++){
     for(int j = 0 ; j < BOARD_W ; j++){
       //player current
-      if(board.board[current_player][i][j] == '1'){
-          value += 2;
-      }
-      else if(board.board[current_player][i][j] == '2'){
-          value += 6;
-      }
-      else if(board.board[current_player][i][j] == '3'){
+      switch(board.board[current_player][i][j]){
+      case 1:
+        value += 2;
+        break;
+      case 2:
+        value += 5;
+        break;
+      case 3:
+        value += 6;
+        break;
+      case 4:
         value += 7;
-      }
-      else if(board.board[current_player][i][j] == '4'){
+        break;
+      case 5:
         value += 8;
+        break;
+
       }
-      else if(board.board[current_player][i][j] == '5'){
-        value += 20;
-      }
-      else if(board.board[current_player][i][j] == '6'){
-        value += INT_MAX;
-      }
-      //player opponent
-      if(board.board[1-current_player][i][j] == '1'){
-          value -= 2;
-      }
-      else if(board.board[1-current_player][i][j] == '2'){
-          value -= 6;
-      }
-      else if(board.board[1-current_player][i][j] == '3'){
+
+
+      switch(board.board[1 - current_player][i][j]){
+      case 1:
+        value -= 2;
+        break;
+      case 2:
+        value -= 5;
+        break;
+      case 3:
+        value -= 6;
+        break;
+      case 4:
         value -= 7;
-      }
-      else if(board.board[1-current_player][i][j] == '4'){
+        break;
+      case 5:
         value -= 8;
-      }
-      else if(board.board[1-current_player][i][j] == '5'){
-        value -= 20;
-      }
-      else if(board.board[1-current_player][i][j] == '6'){
-        value -= INT_MAX;
-      }
+        break;
+      }      
     }
   }
+  //std::cout<<value<<std::endl;
   return value;
 }
 
